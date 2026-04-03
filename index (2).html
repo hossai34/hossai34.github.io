@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohsin Hossain</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #181818;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --text-secondary: #999;
+    --text-muted: #666;
+    --link: #7eb8f7;
+    --accent-light: #1e1e1e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 15px;
+    text-align: justify;
+  }
+
+  ::selection { background: #333; }
+
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0.75rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15,15,15,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-weight: 700; font-size: 1rem; color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; align-items: center; }
+
+  .nav-links a {
+    color: var(--text-secondary); text-decoration: none;
+    font-size: 0.8rem; font-weight: 500; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+  .nav-btn {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.4rem 0.9rem; border-radius: 6px;
+    font-size: 0.78rem; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--border); color: var(--text-secondary);
+    background: var(--surface);
+  }
+  .nav-btn:hover { border-color: #555; color: var(--text); text-decoration: none; }
+
+  .nav-btn-primary {
+    background: #e0e0e0; color: #0f0f0f; border-color: #e0e0e0;
+  }
+  .nav-btn-primary:hover { background: #fff; }
+
+  /* LAYOUT */
+  .container { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 4rem 0; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 1.5rem; text-align: left;
+  }
+
+  .divider { height: 1px; background: var(--border); max-width: 820px; margin: 0 auto; }
+
+  /* HERO */
+  .hero {
+    padding-top: 7rem; padding-bottom: 3rem;
+    display: flex; align-items: center; gap: 3rem;
+  }
+
+  .hero-text { flex: 1; }
+
+  .hero-text h1 {
+    font-size: 2.25rem; font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1.2;
+    margin-bottom: 0.75rem; text-align: left;
+  }
+
+  .hero-text .subtitle {
+    font-size: 1rem; color: var(--text-secondary);
+    line-height: 1.7; max-width: 480px; margin-bottom: 1.25rem;
+    text-align: left;
+  }
+
+  .hero-text .status {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem; color: var(--text-muted);
+    background: var(--accent-light); padding: 0.35rem 0.75rem;
+    border-radius: 100px; border: 1px solid var(--border);
+  }
+
+  .status-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; }
+
+  .hero-photo {
+    width: 180px; height: 220px; border-radius: 12px;
+    object-fit: cover; object-position: center top;
+    border: 1px solid var(--border);
+  }
+
+  /* ABOUT */
+  .about-text { color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; }
+
+  /* EXPERIENCE */
+  .exp-item {
+    display: grid; grid-template-columns: 130px 1fr; gap: 1.5rem;
+    padding: 1.25rem 0; border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--text-muted); padding-top: 0.2rem;
+  }
+
+  .exp-role { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+  .exp-company { font-size: 0.85rem; color: var(--link); margin-bottom: 0.4rem; }
+  .exp-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.75; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem; transition: border-color 0.2s;
+  }
+  .project-card:hover { border-color: #444; }
+
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 0.5rem; text-align: left;
+  }
+
+  .project-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; text-align: left; }
+
+  .project-desc {
+    font-size: 0.8rem; color: var(--text-secondary);
+    line-height: 1.7; margin-bottom: 0.75rem;
+  }
+
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.75rem; }
+
+  .tech-pill {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    padding: 0.2rem 0.5rem; background: var(--accent-light);
+    border-radius: 4px; color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+
+  .project-links { display: flex; gap: 0.75rem; }
+
+  .project-link {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    color: var(--link); text-decoration: none;
+  }
+  .project-link:hover { text-decoration: underline; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  .skill-group-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; color: var(--text-muted);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.6rem; text-align: left;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  .skill-tag {
+    font-size: 0.8rem; padding: 0.3rem 0.7rem;
+    background: var(--accent-light); border-radius: 4px;
+    color: var(--text-secondary); border: 1px solid var(--border);
+  }
+
+  .cert-row {
+    margin-top: 2rem; padding: 1rem 1.25rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+
+  .cert-info { font-size: 0.85rem; }
+  .cert-info strong { font-weight: 600; }
+  .cert-info span { color: var(--text-muted); font-size: 0.78rem; }
+
+  .cert-link {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    color: var(--link); text-decoration: none; white-space: nowrap;
+  }
+  .cert-link:hover { text-decoration: underline; }
+
+  /* CONTACT */
+  #contact { padding: 3rem 0; }
+
+  .contact-row {
+    display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+
+  .contact-row a {
+    color: var(--text-secondary); text-decoration: none;
+  }
+  .contact-row a:hover { color: var(--text); text-decoration: none; }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 2rem; text-align: center;
+    font-size: 0.72rem; color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0.75rem 1.25rem; }
+    .nav-links { display: none; }
+    .container { padding: 0 1.25rem; }
+    .hero { flex-direction: column-reverse; text-align: center; gap: 1.5rem; padding-top: 6rem; }
+    .hero-text h1, .hero-text .subtitle { text-align: center; }
+    .hero-text .subtitle { margin-left: auto; margin-right: auto; }
+    .hero-photo { width: 140px; height: 170px; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .cert-row { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Mohsin Hossain</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.linkedin.com/in/hossai34/" target="_blank" class="nav-btn">LinkedIn</a></li>
+    <li><a href="mohsin-resume.pdf" target="_blank" class="nav-btn nav-btn-primary">Resume</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Mohsin Hossain</h1>
+      <p class="subtitle">
+        Computer Science · Michigan State University · Honors College<br>
+        B.S. in Computer Science, Minor in Business
+      </p>
+      <div class="status">
+        <div class="status-dot"></div>
+        Open to full-time roles and graduate programs
+      </div>
+    </div>
+    <img src="mohsin-photo.jpeg" alt="Mohsin Hossain" class="hero-photo">
+  </div>
+
+  <div class="divider"></div>
+
+  <section id="about">
+    <div class="section-label">About</div>
+    <div class="about-text">
+      I am a senior Computer Science student in the Honors College at Michigan State University with a minor in Business and a 3.75 GPA. I have a strong interest in building practical technology that solves real-world problems. My work focuses on software development, data systems, and intelligent applications. I enjoy turning complex ideas into simple, useful tools and constantly learning new technologies to improve the way systems are designed and built.
+      <br><br>
+      I have experience working on research projects, software development, and academic teaching roles. Through these experiences, I have developed strong problem-solving, collaboration, and communication skills. I am passionate about technology, innovation, and creating solutions that make an impact.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="experience">
+    <div class="section-label">Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan 2025 –<br>Present</div>
+      <div>
+        <div class="exp-role">Software Engineer - Capstone Experience</div>
+        <div class="exp-company">General Motors</div>
+        <div class="exp-desc">Developing a full-stack EV Charging Infrastructure Dashboard that aggregates real-time charger data across multiple GM campuses. Built backend services using FastAPI and PostgreSQL to process charger availability and usage data from external vendor APIs. Implemented containerized services with Docker for scalable data ingestion and periodic data synchronization. Contributed to the Next.js frontend to create interactive dashboards that visualize charger status, usage trends, and analytics for employees. Designed features such as charger queue management and notification systems.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">May – Aug<br>2025</div>
+      <div>
+        <div class="exp-role">Research Assistant</div>
+        <div class="exp-company"><a href="https://murillogroupmsu.com" target="_blank">Murillo Group Lab</a></div>
+        <div class="exp-desc">Developed agent-based simulations to study international conflict dynamics using Q-learning, memory, and reputation mechanisms. Implemented simulation environments in Python and built interactive Streamlit dashboards to visualize emergent behaviors and experimental results. Contributed to research development through model design, experimentation, and data analysis, supporting ongoing research publications in computational social science.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Sept 2024 –<br>May 2025</div>
+      <div>
+        <div class="exp-role">Teaching Assistant</div>
+        <div class="exp-company">Algorithm Thinking & Programming · Survey of Calculus</div>
+        <div class="exp-desc">Led weekly recitation sessions for 30–60 students in Python programming and Calculus, conducting coding labs, practical exercises, and exam review sessions. Assisted with grading assignments and exams, held office hours to support student learning, and collaborated with instructors to enhance course content and create an engaging, hands-on learning environment.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Aug 2024 –<br>Present</div>
+      <div>
+        <div class="exp-role">Resident Assistant</div>
+        <div class="exp-company">MSU Residence Education & Housing</div>
+        <div class="exp-desc">Supervising a floor of over 60 residents, maintaining a safe and inclusive living environment through conflict resolution, crisis response, and one-on-one student support. Planning and organizing monthly community events promoting wellness, diversity, and engagement. Serving as a resource and mentor for residents navigating academic and personal challenges.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-tag">Autonomous Systems</div>
+        <div class="project-name">Lane Management System</div>
+        <div class="project-desc">Co-authored a 33-page IEEE-format SRS for a driver-assistance system with three subsystems: LDWS, LCS, and LKS. Designed use case diagrams, domain models, sequence diagrams, and state models. Built a Unity prototype with interactive scenarios.</div>
+        <div class="project-tech">
+          <span class="tech-pill">IEEE SRS</span>
+          <span class="tech-pill">UML</span>
+          <span class="tech-pill">Unity</span>
+        </div>
+        <div class="project-links">
+          <a href="https://play.unity.com/en/games/65252bb3-cd4e-4f5f-a277-d9f1335b10aa/cse-435-lms2-prototype" target="_blank" class="project-link">Play Demo ↗</a>
+          <a href="LMS_SRS.pdf" target="_blank" class="project-link">View SRS ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-tag">Robotics</div>
+        <div class="project-name">TurtleBot Convoy Simulation</div>
+        <div class="project-desc">Built a leader-follower convoy in Gazebo where the leader publishes its position and the follower calculates distance and direction to maintain a 0.5m safe gap using ROS topics and services.</div>
+        <div class="project-tech">
+          <span class="tech-pill">ROS</span>
+          <span class="tech-pill">Gazebo</span>
+          <span class="tech-pill">Python</span>
+        </div>
+        <div class="project-links">
+          <a href="convoy_demo.mp4" target="_blank" class="project-link">Watch Demo ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-tag">Computer Vision</div>
+        <div class="project-name">Traffic Sign Recognition</div>
+        <div class="project-desc">Camera calibration in ROS with YOLO models trained on Roboflow datasets for real-time stop sign detection in dynamic robotic environments.</div>
+        <div class="project-tech">
+          <span class="tech-pill">YOLO</span>
+          <span class="tech-pill">ROS</span>
+          <span class="tech-pill">OpenCV</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-tag">Cybersecurity</div>
+        <div class="project-name">Web Defacement Attack Simulation</div>
+        <div class="project-desc">Proof-of-concept using Ettercap and DNS spoofing to demonstrate malicious web redirection vulnerabilities and mitigation techniques in a controlled environment.</div>
+        <div class="project-tech">
+          <span class="tech-pill">Ettercap</span>
+          <span class="tech-pill">DNS</span>
+          <span class="tech-pill">Networking</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-tag">Data Science</div>
+        <div class="project-name">UEFA EURO Soccer Analysis</div>
+        <div class="project-desc">Analyzed 60+ years of UEFA EURO data across scoring trends, player attributes, and coaching continuity. Built a Random Forest model to predict tournament outcomes from qualifying performance.</div>
+        <div class="project-tech">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">Scikit-learn</span>
+        </div>
+        <div class="project-links">
+          <a href="UEFA_EURO_Analysis.pdf" target="_blank" class="project-link">View Report ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="skills">
+    <div class="section-label">Skills & Certification</div>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-group-label">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">Assembly</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">ML & Robotics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">OpenCV</span>
+          <span class="skill-tag">ROS</span>
+          <span class="skill-tag">YOLO</span>
+          <span class="skill-tag">NumPy</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Web & Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">Streamlit</span>
+          <span class="skill-tag">PostgreSQL</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">Shell</span>
+          <span class="skill-tag">SIEM</span>
+        </div>
+      </div>
+    </div>
+    <div class="cert-row">
+      <div class="cert-info">
+        <strong>Google Cybersecurity Professional Certificate</strong><br>
+        <span>8-course program · Python, Linux, SQL, SIEM, IDS · Aug 2025</span>
+      </div>
+      <a href="Google_cybersecurity_Cert.pdf" target="_blank" class="cert-link">View Certificate ↗</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="contact">
+    <div class="section-label" style="text-align:center;">Contact</div>
+    <div class="contact-row">
+      <a id="email-link" href="#">Loading...</a>
+      <a href="tel:7143967423">(714) 396-7423</a>
+      <a href="https://www.linkedin.com/in/hossai34/" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>&copy; 2026 Mohsin Hossain</footer>
+
+<script>
+  (function(){
+    var u = 'hossai34'; var d = 'msu.edu';
+    var el = document.getElementById('email-link');
+    el.href = 'mail' + 'to:' + u + '@' + d;
+    el.textContent = u + '@' + d;
+  })();
+  document.querySelectorAll('.nav-links a:not(.nav-btn)').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+      
